@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react"
-import { DataInterfaceNodes, DataSet, Network } from "vis-network"
+import { /*DataInterfaceNodes, DataSet,*/ Network } from "vis-network"
 import { PriorityQueue, Orb } from "../scheduler-core/treap"
 
-type visNode = { id: number; label: string }
-type visEdge = { from: number; to: number }
+//type visNode = { id: number; label: string }
+//type visEdge = { from: number; to: number }
 
 interface PriorityQueueVisualizerProps {
   queue: PriorityQueue<number>
