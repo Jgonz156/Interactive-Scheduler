@@ -1,7 +1,13 @@
 import { Typography } from "@mui/material"
 import SettingsDialog from "../SettingsDialog"
 
-export default function SchedulerSettings({ closeHandler, open = false }) {
+export default function SchedulerSettings({
+  closeHandler,
+  open = false,
+}: {
+  closeHandler: any
+  open: boolean
+}) {
   return (
     <>
       <SettingsDialog
