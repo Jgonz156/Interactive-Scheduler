@@ -37,7 +37,7 @@ export class PriorityQueue<T> {
     // Define a comparison function that takes into account both the keys and the priorities
     const compare = (a: Orb<T>, b: Orb<T>) => {
       if (a.priority !== b.priority) {
-        return b.priority - a.priority
+        return a.priority - b.priority // Change this line
       } else {
         return a.key < b.key ? -1 : 1
       }
@@ -46,13 +46,15 @@ export class PriorityQueue<T> {
     if (compare(newOrb, orb) < 0) {
       orb.left = this._insert(orb.left, newOrb)
 
-      if (orb.left && orb.left.priority > orb.priority) {
+      if (orb.left && orb.left.priority < orb.priority) {
+        // And this line
         orb = this.rotateRight(orb)
       }
     } else {
       orb.right = this._insert(orb.right, newOrb)
 
-      if (orb.right && orb.right.priority > orb.priority) {
+      if (orb.right && orb.right.priority < orb.priority) {
+        // And this line
         orb = this.rotateLeft(orb)
       }
     }
@@ -67,7 +69,8 @@ export class PriorityQueue<T> {
 
     let orb = this.root
     while (orb.left || orb.right) {
-      if (!orb.right || (orb.left && orb.left.priority > orb.right.priority)) {
+      if (!orb.right || (orb.left && orb.left.priority < orb.right.priority)) {
+        // Change this line
         orb = this.rotateRight(orb)
       } else {
         orb = this.rotateLeft(orb)

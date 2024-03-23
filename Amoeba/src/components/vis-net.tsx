@@ -32,7 +32,7 @@ const VisNetwork: React.FC = () => {
     // Use `network` here to configure events, etc
   }, [visJsRef, nodes, edges])
 
-  return <div ref={visJsRef} style={{ width: "1600px", height: "800px" }} />
+  return <div ref={visJsRef} />
 }
 
 export default VisNetwork
