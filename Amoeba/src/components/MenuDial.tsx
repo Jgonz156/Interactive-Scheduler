@@ -12,6 +12,9 @@ import TimelineIcon from "@mui/icons-material/Timeline"
 import DeveloperBoardIcon from "@mui/icons-material/DeveloperBoard"
 import SpeedIcon from "@mui/icons-material/Speed"
 import SimulationSettings from "./settingMenus/SimulationSpeed"
+import CoresSettings from "./settingMenus/Cores"
+import SchedulerSettings from "./settingMenus/Scheduler"
+import ThreadsSettings from "./settingMenus/Threads"
 
 export default function MenuDial({ sx }: { sx: SxProps }) {
   const [open, setOpen] = React.useState(false)
@@ -69,7 +72,6 @@ export default function MenuDial({ sx }: { sx: SxProps }) {
   return (
     <Box
       sx={{
-        height: 330,
         transform: "translateZ(0px)",
         flexGrow: 1,
         pointerEvents: "none",
@@ -95,6 +97,15 @@ export default function MenuDial({ sx }: { sx: SxProps }) {
           />
         ))}
       </SpeedDial>
+      <SchedulerSettings
+        closeHandler={actions[0].closeHandler}
+        open={openScheduler}
+      />
+      <ThreadsSettings
+        closeHandler={actions[1].closeHandler}
+        open={openThreads}
+      />
+      <CoresSettings closeHandler={actions[2].closeHandler} open={openCores} />
       <SimulationSettings
         closeHandler={actions[3].closeHandler}
         open={openSimulation}

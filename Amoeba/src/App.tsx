@@ -47,14 +47,13 @@ export const DisplayGraphApp = () => {
         onChange={(e) => setNodeAmount(Number(e.target.value))}
       />
       <Box sx={{ display: "flex" }}>
-        <SigmaContainer style={{ height: "100vh", width: "100vw" }}>
+        <SigmaContainer style={{ height: "100vh", width: "100vw", zIndex: 0 }}>
           <LoadGraph name={nodeName} nodeAmount={nodeAmount} />
         </SigmaContainer>
         <MenuDial
           sx={{
             position: "relative",
             zIndex: 1,
-            marginTop: "-100vh",
             height: "100vh",
           }}
         />
