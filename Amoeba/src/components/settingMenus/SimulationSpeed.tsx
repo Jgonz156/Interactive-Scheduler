@@ -8,7 +8,11 @@ import SettingsDialog from "../SettingsDialog"
 import PlayArrowIcon from "@mui/icons-material/PlayArrow"
 import PauseIcon from "@mui/icons-material/Pause"
 import React from "react"
-import { PlayPause, AmoebaSettingsContext } from "../AmoebaSettingsContext"
+import {
+  SimulationSpeed,
+  PlayPause,
+  AmoebaSettingsContext,
+} from "../AmoebaSettingsContext"
 
 export default function SimulationSettings({
   closeHandler,
@@ -33,6 +37,28 @@ export default function SimulationSettings({
           value: { ...settings.simulation, playPause: PlayPause.Play },
         })
   }
+
+  const handleSimulationSpeed = (_e: Event, v: number | number[]) => {
+    if (typeof v === "number") {
+      dispatch({
+        field: "simulation",
+        value: {
+          ...settings.simulation,
+          simulationSpeed:
+            v === 0
+              ? SimulationSpeed.Slow
+              : v === 33
+              ? SimulationSpeed.Normal
+              : v === 66
+              ? SimulationSpeed.Fast
+              : v === 100
+              ? SimulationSpeed.Realtime
+              : SimulationSpeed.Normal,
+          simulationSpeedSliderVal: v,
+        },
+      })
+    }
+  }
   return (
     <>
       <SettingsDialog
@@ -46,7 +72,7 @@ export default function SimulationSettings({
             value={settings.simulation.playPause}
             exclusive
             onChange={handlePlayPause}
-            aria-label="text alignment"
+            aria-label="Playing and Pausing App Buttons"
           >
             <ToggleButton value={PlayPause.Pause} aria-label="Pause">
               <PauseIcon />
@@ -56,16 +82,27 @@ export default function SimulationSettings({
             </ToggleButton>
           </ToggleButtonGroup>
           <Slider
-            defaultValue={50}
-            valueLabelFormat={(v) =>
-              `${v === 0 ? 0.5 : v === 50 ? 1 : v === 100 ? 2 : 1}x Speed`
-            }
+            value={settings.simulation.simulationSpeedSliderVal}
+            valueLabelFormat={(v: number) => {
+              switch (v) {
+                case 0:
+                  return "0.5x Speed"
+                case 33:
+                  return "1x Speed"
+                case 66:
+                  return "2x Speed"
+                case 100:
+                  return "1000x Speed"
+              }
+            }}
+            onChange={handleSimulationSpeed}
             step={null}
             valueLabelDisplay="auto"
             marks={[
               { value: 0, label: "Slow" },
-              { value: 50, label: "Normal" },
-              { value: 100, label: "Fast" },
+              { value: 33, label: "Normal" },
+              { value: 66, label: "Fast" },
+              { value: 100, label: "Realtime" },
             ]}
           />
         </>

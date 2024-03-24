@@ -16,6 +16,7 @@ const initialSettingsState = {
   simulation: {
     playPause: PlayPause.Play,
     simulationSpeed: SimulationSpeed.Normal,
+    simulationSpeedSliderVal: 33,
   },
   cores: { pCoreCount: 1, eCoreCount: 0 },
   threads: { threadCount: 10, threadCost: 10000 },
