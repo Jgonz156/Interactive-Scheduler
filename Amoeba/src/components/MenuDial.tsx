@@ -26,36 +26,51 @@ export default function MenuDial({ sx }: { sx: SxProps }) {
   const [openThreads, setOpenThreads] = React.useState(false)
   const [openScheduler, setOpenScheduler] = React.useState(false)
 
-  const actions = [
+  const menus = [
     {
       icon: <ChecklistIcon />,
       name: "Scheduler Priority",
-      closeHandler: () => {
-        setOpenScheduler(false)
-      },
       openHandler: () => {
         setOpenScheduler(true)
       },
+      menu: (
+        <SchedulerSettings
+          closeHandler={() => {
+            setOpenScheduler(false)
+          }}
+          open={openScheduler}
+        />
+      ),
     },
     {
       icon: <TimelineIcon />,
       name: "Threads",
-      closeHandler: () => {
-        setOpenThreads(false)
-      },
       openHandler: () => {
         setOpenThreads(true)
       },
+      menu: (
+        <ThreadsSettings
+          closeHandler={() => {
+            setOpenThreads(false)
+          }}
+          open={openThreads}
+        />
+      ),
     },
     {
       icon: <DeveloperBoardIcon />,
       name: "Cores",
-      closeHandler: () => {
-        setOpenCores(false)
-      },
       openHandler: () => {
         setOpenCores(true)
       },
+      menu: (
+        <CoresSettings
+          closeHandler={() => {
+            setOpenCores(false)
+          }}
+          open={openCores}
+        />
+      ),
     },
     {
       icon: <SpeedIcon />,
@@ -66,6 +81,14 @@ export default function MenuDial({ sx }: { sx: SxProps }) {
       openHandler: () => {
         setOpenSimulation(true)
       },
+      menu: (
+        <SimulationSettings
+          closeHandler={() => {
+            setOpenSimulation(false)
+          }}
+          open={openSimulation}
+        />
+      ),
     },
   ]
 
@@ -87,7 +110,7 @@ export default function MenuDial({ sx }: { sx: SxProps }) {
         onOpen={handleOpen}
         open={open}
       >
-        {actions.map((action) => (
+        {menus.map((action) => (
           <SpeedDialAction
             key={action.name}
             icon={action.icon}
@@ -97,19 +120,7 @@ export default function MenuDial({ sx }: { sx: SxProps }) {
           />
         ))}
       </SpeedDial>
-      <SchedulerSettings
-        closeHandler={actions[0].closeHandler}
-        open={openScheduler}
-      />
-      <ThreadsSettings
-        closeHandler={actions[1].closeHandler}
-        open={openThreads}
-      />
-      <CoresSettings closeHandler={actions[2].closeHandler} open={openCores} />
-      <SimulationSettings
-        closeHandler={actions[3].closeHandler}
-        open={openSimulation}
-      />
+      {menus.map((action) => action.menu)}
     </Box>
   )
 }

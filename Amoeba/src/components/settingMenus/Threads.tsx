@@ -1,5 +1,7 @@
-import { Typography } from "@mui/material"
+import { TextField, Typography } from "@mui/material"
 import SettingsDialog from "../SettingsDialog"
+import React from "react"
+import { AmoebaSettingsContext } from "../AmoebaSettingsContext"
 
 export default function ThreadsSettings({
   closeHandler,
@@ -8,6 +10,7 @@ export default function ThreadsSettings({
   closeHandler: any
   open: boolean
 }) {
+  const { settings, dispatch } = React.useContext(AmoebaSettingsContext)
   return (
     <>
       <SettingsDialog
@@ -15,7 +18,20 @@ export default function ThreadsSettings({
         closeHandler={closeHandler}
         open={open}
       >
-        <Typography>Im the Thread settings</Typography>
+        <>
+          <Typography>Im the Thread settings</Typography>
+          <TextField
+            id="outlined-basic"
+            label="Insert Number of Nodes Here"
+            variant="outlined"
+            onChange={(e) =>
+              dispatch({
+                field: "threads",
+                value: { ...settings, threadCount: Number(e.target.value) },
+              })
+            }
+          />
+        </>
       </SettingsDialog>
     </>
   )
