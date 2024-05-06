@@ -216,8 +216,6 @@ ax.set_xlabel('Time (s)')
 ax.set_title('Persistent Intel Raptor Lake i9 13900K Task Schedule')
 plt.show()
 
-#machine_tasks = [(machine.completed_tasks, machine.core_type) for machine in i9_13900K_scheduler.machines]
-
 fig, ax = plt.subplots(figsize=(10, 6))
 
 # Create a dictionary mapping affinities to colors
